@@ -1,0 +1,105 @@
+﻿@model 大專.Models.Member
+@{
+    ViewBag.Title = "UploadImg";
+}
+@section css{
+    <style>
+        .catagories-menu a {
+            font-size: 20px !important;
+            margin-top: 20px;
+        }
+
+        #image {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+        }
+
+        #click {
+            height: 50px;
+            width: 150px;
+            background-color: red;
+            color: aliceblue;
+            margin-left: 70px;
+            font-size: 20px;
+        }
+
+        #file {
+            margin-left: 70px;
+            color: red;
+            font-size: 20px;
+        }
+    </style>
+}
+
+<section class="shop_grid_area section-padding-80">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-4 col-lg-3">
+                <div class="shop_sidebar_area">
+                    <div class="widget catagory mb-50">
+                        <h6 class="widget-title mb-30" style="font-size:35px">會員中心</h6>
+
+                        @*<img id="image" src="~/img/狗.jpg" alt="圓形圖示">*@
+                        @{
+                            string aaa = $@"D:\資策會上課內容\ASP,NET_MVC練習\大專\大專\img\member-img\{Session["userImg"]}";
+                            if (System.IO.File.Exists(aaa))
+                            {
+                                <img id="image" src="~/img/member-img/@Session["userImg"]" />
+                            }
+                            else
+                            {
+                                <img id="image" src="~/img/member-img/0.jpg" />
+                            }
+                        }
+                        @Html.DisplayText("Username")
+
+                        <div class="catagories-menu">
+                            <ul id="menu-content2" class="menu-content collapse show">
+                                <li data-toggle="collapse" data-target="#clothing">
+                                    <a href="#">我的帳戶</a>
+                                    <ul class="sub-menu collapse show" id="clothing">
+                                        @*<li><a href="~/Home/ChangeProfile/2">個人檔案</a></li>
+                                            <li><a href="~/Home/ChangePassword/2">更改密碼</a></li>*@
+                                        <li>@Html.ActionLink("個人檔案", "ChangeProfile", new { id = Session["userID"] })</li>
+                                        <li>@Html.ActionLink("更改密碼", "ChangePassword", new { id = Session["userID"] })</li>
+                                        <li>@Html.ActionLink("上傳頭貼", "UploadImg", new { id = Session["userID"] }) </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            @*<a href="~/Home/MemberCentre">購物清單</a>*@
+                            @Html.ActionLink("購物清單", "MemberCentre", new { id = Session["userID"] })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-8 col-lg-9" style="background-color:lavenderblush">
+                <div class="shop_grid_product_area">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="product-topbar d-flex align-items-center justify-content-between">
+                                <!-- Total Products -->
+                                <div class="total-products">
+                                    <h1 style="font-size:35px">上傳個人頭圖</h1><br /><br />
+                                    <form method="post" enctype="multipart/form-data">
+                                        <input type="file" name="file" id="file" /><br /><br />
+                                        <input type="submit" value="提交" id="click" />
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div>@Html.Raw(TempData["msg"])</div>
+@section script{
+    <script src="~/js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+}
+
+
+

@@ -1,0 +1,68 @@
+﻿@model 大專.Models.Member
+
+
+@{
+    ViewBag.Title = "Login";
+}
+
+@section css{
+    <style>
+        .col-md-10 {
+            font-size: 20px;
+        }
+
+        .control-label {
+            font-size: 18px;
+        }
+
+        .data-val-required {
+            font-size: 18px;
+        }
+        }
+    </style>
+    @using (Html.BeginForm("Autherize", "Login", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger  " })
+        <div class="col-sm-6">
+            <img src="~/images/royal.jpg">
+        </div>
+
+        <div class="col-sm-6">
+            <div class="form-horizontal" style="position:relative;top:80px">
+                <h2 class="font-italic text-info">會員登入</h2>
+
+                <hr />
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Uid, htmlAttributes: new { @class = "control-label col-md-2 bg-light text-dark" })
+                    <div class="col-md-10">
+
+                        @Html.EditorFor(model => model.Uid, new { htmlAttributes = new { @class = "form-control input-group-sm" } })
+                        @Html.ValidationMessageFor(model => model.Uid, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Passwrod, htmlAttributes: new { @class = "control-label col-md-2 bg-light text-dark" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Passwrod, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Passwrod, "", new { @class = "text-danger " })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.DisplayFor(x => x.LoginErrorMessage)
+                </div>
+                <div class="col-md-offset-7 col-md-10">
+                    <a href="/Login/ForgotPwd">忘記密碼?</a>
+                    <input type="submit" value="登入" class="btn btn-lg btn-success" style="width:80px;height:50px" />
+                    <input type="button" value="註冊" class="btn btn-lg btn-danger" style="width:80px;height:50px" onclick="location.href='/Login/Register'" />
+
+                </div>
+            </div>
+        </div>
+    }
+    @section script{
+        <script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    }
+

@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "ForgotPwd";
+}
+
+<h2>ForgotPwd</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal" style="background-color: whitesmoke;width:800px;height: 500px;margin:0 auto;">
+        <h1 style="color:cadetblue">忘記密碼</h1>
+        <hr />
+        <div class="text-success">
+            @ViewBag.Message
+        </div>
+        <div class="form-group">
+            <p>請在下面輸入您的註冊電子郵件地址，接收電子郵件以重置密碼。</p>
+        </div>
+        <div class="form-group">
+            <label class="control-label ">Email信箱</label>
+            @Html.TextBox("EmailID", "", new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-10 col-md-pull-10 ">
+                <input type="submit" value="送出" class="btn btn-lg btn-success" style="width:80px;height:50px;" />
+            </div>
+        </div>
+    </div>
+
+}
+
